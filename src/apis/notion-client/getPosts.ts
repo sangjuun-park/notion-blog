@@ -13,6 +13,9 @@ import { TPosts } from "src/types"
 // TODO: react query를 사용해서 처음 불러온 뒤로는 해당데이터만 사용하도록 수정
 export const getPosts = async () => {
   let id = CONFIG.notionConfig.pageId as string
+  // NOTION_PAGE_ID가 없는 환경(예: 환경변수가 없는 프리뷰 빌드)에서는 Notion을 부르지 않고 빈 목록을 돌려준다.
+  // 값이 설정된 환경의 동작은 그대로다.
+  if (!id) return []
   const api = new NotionAPI()
 
   const response = await api.getPage(id)
