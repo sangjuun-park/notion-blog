@@ -17,9 +17,16 @@ const filter: FilterPostsOptions = {
   acceptType: ["Paper", "Post", "Page"],
 }
 
+// src/pages 아래 정적 라우트가 이미 차지한 slug. 같은 경로를 getStaticPaths가
+// 반환하면 Next 빌드가 "Conflicting paths"로 실패한다.
+// portfolio: src/pages/portfolio (같은 slug의 Notion 글은 이 주소에서 가려진다)
+const STATIC_ROUTE_SLUGS = ["portfolio"]
+
 export const getStaticPaths = async () => {
   const posts = await getPosts()
-  const filteredPost = filterPosts(posts, filter)
+  const filteredPost = filterPosts(posts, filter).filter(
+    (row) => !STATIC_ROUTE_SLUGS.includes(row.slug)
+  )
 
   return {
     paths: filteredPost.map((row) => `/${row.slug}`),

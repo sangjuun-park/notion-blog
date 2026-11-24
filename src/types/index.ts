@@ -6,6 +6,8 @@ import { ReactElement, ReactNode } from "react"
 // TODO: refactor types
 export type NextPageWithLayout<PageProps = {}> = NextPage<PageProps> & {
   getLayout?: (page: ReactElement) => ReactNode
+  // true면 블로그 RootLayout(헤더, 테마)을 거치지 않고 페이지가 전체 화면을 직접 그린다
+  bare?: boolean
 }
 
 export type AppPropsWithLayout = AppProps & {

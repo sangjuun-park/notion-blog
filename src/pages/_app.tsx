@@ -6,6 +6,10 @@ import { queryClient } from "src/libs/react-query"
 function App({ Component, pageProps }: AppPropsWithLayout) {
   const getLayout = Component.getLayout || ((page) => page)
 
+  if (Component.bare) {
+    return <Component {...pageProps} />
+  }
+
   return (
     <QueryClientProvider client={queryClient}>
       <Hydrate state={pageProps.dehydratedState}>
