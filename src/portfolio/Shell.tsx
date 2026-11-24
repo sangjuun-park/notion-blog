@@ -49,8 +49,7 @@ export const Shell = ({ title, description, path, children }: Props) => (
       <main>{children}</main>
       <footer className="pf-foot">
         <span>
-          수치는 당시 로그와 측정값입니다. 근거가 없는 항목은 비워 두고 그렇게
-          적었습니다.
+          {PROFILE.name} · {PROFILE.role}
         </span>
         <a href="https://github.com/sangjuun-park">github.com/sangjuun-park</a>
       </footer>
